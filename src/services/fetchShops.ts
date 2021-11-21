@@ -1,9 +1,7 @@
 import axios from "./axios";
 
-const fetchShops = ({ signal }: any) =>
+const fetchShops = () =>
   axios
-    .get("/Events/GetData/100", {
-      signal
-    } as any)
+    .get("/Events/GetData/100")
 
 export default fetchShops;

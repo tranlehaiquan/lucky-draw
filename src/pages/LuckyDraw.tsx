@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import KeenSlider from "keen-slider/react";
 import { sortBy, uniqBy } from "lodash";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Layout1 } from "../components/Layout";
 import Shop from "../components/Shop";
@@ -21,14 +21,15 @@ const generateShop = (): IShop => ({
 
 function App() {
   const querySearch = new URLSearchParams(window.location.search);
+  const [isLoading, setIsLoading] = useState(false);
 
   const totalShop = querySearch.get("total")
     ? Number(querySearch.get("total"))
     : 1;
 
-  const { isLoading, data } = useQuery("shops", fetchShops);
+  const [shops, setShops] = useState<IShop[]>([]);
 
-  const [selectedShops, setSelectedShops] = useState<IShop[]>([]);
+  const [dirty, setDirty] = useState(false);
   const [selectedShopVisiable, setSelectedShopVisiable] = useState<IShop[]>(
     [...new Array(totalShop)].map(() => generateShop())
   );
@@ -36,6 +37,8 @@ function App() {
   const ref = useRef<KeenSlider>();
 
   const handleDraw = async () => {
+    setDirty(true);
+    setIsLoading(true);
     setSelectedShopVisiable(
       [...new Array(totalShop)].map(() => generateShop())
     );
@@ -44,40 +47,52 @@ function App() {
       luckyDraw(totalShop),
       await delayer(3000),
     ]);
-    const shops = luckyDrawRs.data || [];
-    setSelectedShops(shops);
-    setTimeout(() => {
-      animationDraw(shops);
+    const shopsLucky = luckyDrawRs.data || [];
+    const shopsMerge = uniqBy([...shopsLucky, ...shops], "storeCode");
+    setShops(shopsMerge);
+
+    setTimeout(async () => {
+      await animationDraw(shopsLucky);
+      setIsLoading(false);
     }, 0);
   };
 
-  const animationDraw = async (shops: IShop[]) => {
-    const shopsDraw = sortBy(uniqBy<IShop>(
-      [...selectedShops, ...(data && !isLoading ? data.data : [])],
-      "storeCode"
-    ), 'storeName');
-
-    for (let x = 0; x < shops.length; x++) {
+  const animationDraw = async (shopsLucky: IShop[]) => {
+    for (let x = 0; x < shopsLucky.length; x++) {
       setDrawing(true);
+
       await delayer(3000);
       setDrawing(false);
       await delayer(50);
-      const index = shopsDraw.findIndex((i) =>  i.storeName === shops[x].storeName);
+
+      const index = shopsLucky.findIndex(
+        (i) => i.storeName === shopsLucky[x].storeName
+      );
       ref.current && ref.current.moveToSlide(index);
-      await delayer(50);
+      await delayer(500);
+
       setSelectedShopVisiable(((curr: any) => {
         const shopVisiable = [...curr];
-        shopVisiable[x] = shops[x];
+        shopVisiable[x] = shopsLucky[x];
         return shopVisiable;
       }) as any);
-      await delayer(1000);
+      await delayer(2000);
     }
   };
 
-  const shopsDraw = sortBy(uniqBy(
-    [...selectedShops, ...(data && !isLoading ? data.data : [])],
-    "storeCode"
-  ), 'storeName');
+  const reset = () => {
+    setDirty(false);
+    setSelectedShopVisiable([...new Array(totalShop)].map(() => generateShop()));
+    setDrawing(false);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    (async () => {
+      const dataRs = await fetchShops();
+      setShops(dataRs.data);
+    })();
+  }, []);
 
   return (
     <Layout1>
@@ -87,7 +102,15 @@ function App() {
             <img src={title} className="max-w-lg" alt="text" />
           </div>
 
-          <Wheel shops={shopsDraw} drawing={drawing} wheelRef={ref} />
+          {!dirty ? (
+            <div className="bg-shopItem p-1 mt-2 w-2/5 ml-auto mr-auto mb-5">
+              <div className="w-full h-8 text-white flex items-center justify-center bg-heliotrope uppercase font-bold">
+                Tên cửa hàng
+              </div>
+            </div>
+          ) : (
+            <Wheel shops={shops} drawing={drawing} wheelRef={ref} />
+          )}
 
           <ShopTitle />
 
@@ -100,11 +123,23 @@ function App() {
             />
           ))}
         </div>
-        <div className="flex items-end justify-center h-full pb-32">
+        <div className="flex items-end justify-end h-full pb-5 pr-5">
+          {dirty && (
+            <button
+              className={clsx(
+                "px-5 py-2 rounded-lg uppercase font-bold mr-2.5",
+                isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-white"
+              )}
+              onClick={reset}
+              disabled={isLoading}
+            >
+              Đặt Lại
+            </button>
+          )}
           <button
             className={clsx(
-              "px-5 py-2 rounded-lg uppercase font-bold border-2 border-grey",
-              isLoading ? "bg-grey-100" : "bg-white"
+              "px-5 py-2 rounded-lg uppercase font-bold",
+              isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-white"
             )}
             onClick={handleDraw}
             disabled={isLoading}

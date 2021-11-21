@@ -17,7 +17,7 @@ const ShopItem: React.FC<Props> = ({
   return (
     <div className={className}>
       <div className="grid grid-cols-3 gap-4">
-        <div className="text-center">
+        <div className="">
           <div className="bg-shopItem p-1 mt-2">
             <div
               className={clsx(
