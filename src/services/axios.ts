@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 });
 
 export const setAuth = (token: string) => {
-  axiosInstance.defaults.headers['Authorization'] = `Bearer ${token}`;
+  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
   return axiosInstance;
 }
