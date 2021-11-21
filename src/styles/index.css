@@ -5,13 +5,13 @@
 
 @screen md {
   .layout1 {
-    @apply bg-no-repeat h-screen w-screen bg-cover;
+    @apply bg-no-repeat h-screen w-screen bg-cover pt-5;
     background-image: url("../images/background.jpeg");
   }
 }
 
 .layout1 {
-  @apply bg-blue-500 pt-5;
+  @apply bg-blue-500 min-h-screen;
 }
 
 .bg-shopItem {
