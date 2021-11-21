@@ -13,7 +13,7 @@ interface Props {
 const Login: React.FC<Props> = () => {
   const { login } = useContext(AuthenticateContext);
   const location = useLocation();
-  const from = location.state.from
+  const from = location.state?.from
     ? location.state.from.pathname + location.state.from.search
     : "/";
   const schema = useMemo(() => {

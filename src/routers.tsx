@@ -13,7 +13,15 @@ function Routers() {
           path="/draw"
           element={
             <RequireAuth>
-              <LuckyDraw />
+              <LuckyDraw key={1} totalShop={1} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/draw5"
+          element={
+            <RequireAuth>
+              <LuckyDraw key={5} totalShop={5} />
             </RequireAuth>
           }
         />

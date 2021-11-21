@@ -3,6 +3,7 @@ import KeenSlider from "keen-slider/react";
 import { sortBy, uniqBy } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { Layout1 } from "../components/Layout";
 import Shop from "../components/Shop";
 import ShopTitle from "../components/ShopTitle";
@@ -19,13 +20,9 @@ const generateShop = (): IShop => ({
   phoneNumber: "",
 });
 
-function App() {
+const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
   const querySearch = new URLSearchParams(window.location.search);
   const [isLoading, setIsLoading] = useState(false);
-
-  const totalShop = querySearch.get("total")
-    ? Number(querySearch.get("total"))
-    : 1;
 
   const [shops, setShops] = useState<IShop[]>([]);
 
@@ -76,16 +73,18 @@ function App() {
         shopVisiable[x] = shopsLucky[x];
         return shopVisiable;
       }) as any);
-      await delayer(2000);
+      await delayer(3000);
     }
   };
 
   const reset = () => {
     setDirty(false);
-    setSelectedShopVisiable([...new Array(totalShop)].map(() => generateShop()));
+    setSelectedShopVisiable(
+      [...new Array(totalShop)].map(() => generateShop())
+    );
     setDrawing(false);
     setIsLoading(false);
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -105,7 +104,7 @@ function App() {
           {!dirty ? (
             <div className="bg-shopItem p-1 mt-2 w-2/5 ml-auto mr-auto mb-5">
               <div className="w-full h-8 text-white flex items-center justify-center bg-heliotrope uppercase font-bold">
-                Tên cửa hàng
+                Tên Gian Hàng
               </div>
             </div>
           ) : (
@@ -123,6 +122,11 @@ function App() {
             />
           ))}
         </div>
+        {!isLoading && <div className="fixed top-4 right-4 uppercase font-bold text-blue-600">
+          {totalShop === 1 && <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw5">Đi đến giải khuyến khích →</Link>}
+          {totalShop === 5 && <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw">Đi đến giải đặc biệt →</Link>}
+        </div>}
+
         <div className="flex items-end justify-end h-full pb-5 pr-5">
           {dirty && (
             <button

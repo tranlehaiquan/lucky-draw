@@ -21,7 +21,7 @@ const ShopItem: React.FC<Props> = ({
           <div className="bg-shopItem p-1 mt-2">
             <div
               className={clsx(
-                "w-full h-8 text-white flex items-center justify-center",
+                "w-full h-8 text-white flex items-center pl-1",
                 secondary ? "bg-blue-400" : "bg-heliotrope"
               )}
             >

@@ -34,7 +34,7 @@ const Authenticate: React.FC<Props> = ({ children }) => {
       if (dataRs) {
         setToken(dataRs);
         setAuth(dataRs);
-        navigation(from || "/");
+        navigation(from === "/" ? "/draw" : from);
       } else {
         alert("Please try again!");
       }

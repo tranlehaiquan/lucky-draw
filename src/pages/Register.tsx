@@ -131,13 +131,6 @@ const Login: React.FC<Props> = () => {
           {done && (
             <div className="text-center mt-10 mb-10">
               <p className="text-xl md:text-white">Cảm ơn bạn đã đăng ký!</p>
-
-              <button
-                className="bg-white px-5 py-2 rounded-lg mt-2"
-                onClick={() => setDone(false)}
-              >
-                Đăng thêm
-              </button>
             </div>
           )}
         </div>
