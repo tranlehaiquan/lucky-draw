@@ -9,15 +9,15 @@ function Routers() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Register />} />
-        {/* <Route
+        <Route
           path="/draw"
           element={
             <RequireAuth>
               <LuckyDraw />
             </RequireAuth>
           }
-        /> */}
-        {/* <Route path="/login" element={<Login />} /> */}
+        />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
