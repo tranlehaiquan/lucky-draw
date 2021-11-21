@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { AuthenticateContext } from "../components/Authenticate";
@@ -13,6 +13,7 @@ interface Props {
 
 const Login: React.FC<Props> = () => {
   const { showLoading, hideLoading } = useContext(AuthenticateContext);
+  const [done, setDone] = useState(false);
   const schema = useMemo(() => {
     return yup.object().shape({
       storeName: yup.string().required('Tên cửa hàng là bắt buộc!'),
@@ -31,7 +32,7 @@ const Login: React.FC<Props> = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
         <div className="h-full flex justify-center items-center">
-          <div className="w-full px-10 max-w-lg py-10">
+          {!done && <div className="w-full px-10 max-w-lg py-10">
             <h1 className="uppercase text-xl text-center text-white md:text-black mb-2">
               Thôn tin nhà bán hàng cần cung cấp
             </h1>
@@ -47,7 +48,12 @@ const Login: React.FC<Props> = () => {
               validationSchema={schema}
               onSubmit={async (values) => {
                 showLoading();
-                await shopRegister(values);
+                const dataRs = await shopRegister(values);
+                const { data } = dataRs;
+                if(data.success && data.message) {
+                  alert(data.message);
+                  setDone(true);
+                }
                 hideLoading();
               }}
             >
@@ -113,13 +119,14 @@ const Login: React.FC<Props> = () => {
                       className="bg-white px-5 py-2 rounded-lg mt-2"
                       onClick={() => handleSubmit()}
                     >
-                      Đăng nhập
+                      Đăng ký
                     </button>
                   </div>
                 </>
               )}
             </Formik>
-          </div>
+          </div>}
+          {done && <p className="text-xl md:text-white">Cảm ơn bạn đã đăng ký!</p>}
         </div>
       </div>
     </Layout1>
