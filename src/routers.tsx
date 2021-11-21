@@ -8,16 +8,16 @@ function Routers() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
+        <Route path="/" element={<Register />} />
+        {/* <Route
+          path="/draw"
           element={
             <RequireAuth>
               <LuckyDraw />
             </RequireAuth>
           }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        /> */}
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </div>
   );

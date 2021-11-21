@@ -8,9 +8,10 @@ interface Props {
   shops: Shop[];
   selected?: string;
   drawing?: boolean;
+  wheelRef?: React.MutableRefObject<any>;
 }
 
-const Wheel: React.FC<Props> = ({ className, shops, selected, drawing = false }) => {
+const Wheel: React.FC<Props> = ({ className, shops, selected, drawing = false, wheelRef }) => {
   return (
     <>
       <div
@@ -34,6 +35,7 @@ const Wheel: React.FC<Props> = ({ className, shops, selected, drawing = false })
                 width={300}
                 selected={selected}
                 pause={!drawing}
+                wheelRef={wheelRef}
               />
             )}
           </div>

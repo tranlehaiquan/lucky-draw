@@ -1,7 +1,8 @@
 import clsx from "clsx";
-import { useContext, useState } from "react";
+import KeenSlider from "keen-slider/react";
+import { sortBy, uniqBy } from "lodash";
+import { useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { AuthenticateContext } from "../components/Authenticate";
 import { Layout1 } from "../components/Layout";
 import Shop from "../components/Shop";
 import ShopTitle from "../components/ShopTitle";
@@ -25,49 +26,68 @@ function App() {
     ? Number(querySearch.get("total"))
     : 1;
 
-  const { isLoading, isError, data, error } = useQuery("shops", fetchShops);
+  const { isLoading, data } = useQuery("shops", fetchShops);
+
+  const [selectedShops, setSelectedShops] = useState<IShop[]>([]);
   const [selectedShopVisiable, setSelectedShopVisiable] = useState<IShop[]>(
     [...new Array(totalShop)].map(() => generateShop())
   );
-  const [selectedShop, setSelectedShop] = useState<IShop[]>([]);
   const [drawing, setDrawing] = useState(false);
+  const ref = useRef<KeenSlider>();
 
   const handleDraw = async () => {
+    setSelectedShopVisiable(
+      [...new Array(totalShop)].map(() => generateShop())
+    );
     setDrawing(true);
     const [luckyDrawRs] = await Promise.all([
       luckyDraw(totalShop),
       await delayer(3000),
     ]);
     const shops = luckyDrawRs.data || [];
-
-    await animationDraw(shops);
+    setSelectedShops(shops);
+    setTimeout(() => {
+      animationDraw(shops);
+    }, 0);
   };
 
   const animationDraw = async (shops: IShop[]) => {
+    const shopsDraw = sortBy(uniqBy<IShop>(
+      [...selectedShops, ...(data && !isLoading ? data.data : [])],
+      "storeCode"
+    ), 'storeName');
+
     for (let x = 0; x < shops.length; x++) {
       setDrawing(true);
       await delayer(3000);
+      setDrawing(false);
+      await delayer(50);
+      const index = shopsDraw.findIndex((i) =>  i.storeName === shops[x].storeName);
+      ref.current && ref.current.moveToSlide(index);
+      await delayer(50);
       setSelectedShopVisiable(((curr: any) => {
         const shopVisiable = [...curr];
         shopVisiable[x] = shops[x];
         return shopVisiable;
       }) as any);
-      setDrawing(false);
+      await delayer(1000);
     }
   };
+
+  const shopsDraw = sortBy(uniqBy(
+    [...selectedShops, ...(data && !isLoading ? data.data : [])],
+    "storeCode"
+  ), 'storeName');
 
   return (
     <Layout1>
       <div className="grid grid-cols-2 pt-40 h-full">
         <div className="px-3">
           <div className="flex justify-center">
-            <img src={title} className="max-w-lg" />
+            <img src={title} className="max-w-lg" alt="text" />
           </div>
 
-          <Wheel
-            shops={data && !isLoading ? data.data : []}
-            drawing={drawing}
-          />
+          <Wheel shops={shopsDraw} drawing={drawing} wheelRef={ref} />
 
           <ShopTitle />
 

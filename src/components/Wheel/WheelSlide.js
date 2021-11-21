@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import "./Wheel.css";
 
 export default function Wheel(props) {
-  const { pause } = props;
+  const { pause, selected } = props;
   const perspective = props.perspective || "center";
   const wheelSize = 20;
   const slides = props.shops.length;
@@ -35,7 +35,6 @@ export default function Wheel(props) {
     slides,
     slidesPerView,
   });
-  const { selected } = props;
   const timer = useRef(undefined);
 
   const [radius, setRadius] = React.useState(0);
@@ -43,6 +42,7 @@ export default function Wheel(props) {
   React.useEffect(() => {
     if (slider) {
       setRadius(slider.details().widthOrHeight / 2);
+      if(props.wheelRef) props.wheelRef.current = slider;
       console.log(slider);
     }
   }, [slider]);
@@ -58,13 +58,12 @@ export default function Wheel(props) {
     };
   }, [pause, slider]);
 
-  React.useEffect(() => {
-    if(selected) {
-      clearInterval(timer.current);
-      const index = shops.findIndex((i) => i === selected);
-      if(index) slider.moveToSlide(index);
-    }
-  }, [selected]);
+  // React.useEffect(() => {
+  //   if(selected) {
+  //     const index = shops.findIndex((i) => i === selected);
+  //     if(index) slider.moveToSlide(index);
+  //   }
+  // }, [selected]);
 
   function slideValues() {
     if (!sliderState) return [];

@@ -1,7 +1,7 @@
 import axios from "./axios";
 
-const luckyDraw = (data: any) =>
+const shopRegister = (data: any) =>
   axios
     .post(`/Events/Register`, data)
 
-export default luckyDraw;
+export default shopRegister;
