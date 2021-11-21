@@ -39,11 +39,13 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
     setSelectedShopVisiable(
       [...new Array(totalShop)].map(() => generateShop())
     );
+    
     setDrawing(true);
     const [luckyDrawRs] = await Promise.all([
       luckyDraw(totalShop),
       await delayer(3000),
     ]);
+
     const shopsLucky = luckyDrawRs.data || [];
     const shopsMerge = uniqBy([...shopsLucky, ...shops], "storeCode");
     setShops(shopsMerge);
@@ -66,14 +68,14 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
         (i) => i.storeName === shopsLucky[x].storeName
       );
       ref.current && ref.current.moveToSlide(index);
-      await delayer(500);
+      await delayer(2000);
 
       setSelectedShopVisiable(((curr: any) => {
         const shopVisiable = [...curr];
         shopVisiable[x] = shopsLucky[x];
         return shopVisiable;
       }) as any);
-      await delayer(3000);
+      await delayer(1000);
     }
   };
 
