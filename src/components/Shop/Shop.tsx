@@ -7,23 +7,50 @@ interface Props extends Shop {
   secondary?: boolean;
 }
 
-const ShopItem: React.FC<Props> = ({ name, code, phone, className, secondary }) => {
+const ShopItem: React.FC<Props> = ({
+  storeName,
+  storeCode,
+  phoneNumber,
+  className,
+  secondary,
+}) => {
   return (
     <div className={className}>
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center">
           <div className="bg-shopItem p-1 mt-2">
-            <div className={clsx("w-full h-8", secondary ? 'bg-blue-400' : 'bg-heliotrope')}>{name}</div>
+            <div
+              className={clsx(
+                "w-full h-8 text-white flex items-center justify-center",
+                secondary ? "bg-blue-400" : "bg-heliotrope"
+              )}
+            >
+              {storeName}
+            </div>
           </div>
         </div>
         <div className="text-center">
           <div className="bg-shopItem p-1 mt-2">
-            <div className={clsx("w-full h-8", secondary ? 'bg-blue-400' : 'bg-heliotrope')}>{code}</div>
+            <div
+              className={clsx(
+                "w-full h-8 text-white flex items-center justify-center",
+                secondary ? "bg-blue-400" : "bg-heliotrope"
+              )}
+            >
+              {storeCode}
+            </div>
           </div>
         </div>
         <div className="text-center">
           <div className="bg-shopItem p-1 mt-2">
-            <div className={clsx("w-full h-8", secondary ? 'bg-blue-400' : 'bg-heliotrope')}>{phone}</div>
+            <div
+              className={clsx(
+                "w-full h-8 text-white flex items-center justify-center",
+                secondary ? "bg-blue-400" : "bg-heliotrope"
+              )}
+            >
+              {phoneNumber}
+            </div>
           </div>
         </div>
       </div>

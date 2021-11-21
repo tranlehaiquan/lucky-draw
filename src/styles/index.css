@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.app {
+.layout1 {
   @apply bg-no-repeat h-screen w-screen bg-cover;
   background-image: url("../images/background.jpeg");
 }
