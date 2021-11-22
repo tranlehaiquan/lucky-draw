@@ -35,7 +35,7 @@ const Login: React.FC<Props> = () => {
           {!done && (
             <div className="w-full px-10 max-w-lg py-10">
               <h1 className="uppercase text-xl text-center text-white md:text-black mb-2">
-                Thôn tin nhà bán hàng cần cung cấp
+                Thông tin nhà bán hàng cần cung cấp
               </h1>
               <Formik
                 initialValues={{
