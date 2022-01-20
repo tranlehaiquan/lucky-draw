@@ -106,7 +106,7 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
           {!dirty ? (
             <div className="bg-shopItem p-1 mt-2 w-2/5 ml-auto mr-auto mb-5">
               <div className="w-full h-8 text-white flex items-center justify-center bg-heliotrope uppercase font-bold">
-                Tên Gian Hàng
+                Name
               </div>
             </div>
           ) : (
@@ -125,7 +125,7 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
           ))}
         </div>
         {!isLoading && (
-          <div className="fixed top-4 right-4 uppercase font-bold text-blue-600 grid grid-cols-1 gap-2">
+          <div className="fixed bottom-4 left-4 uppercase font-bold text-blue-600 grid grid-cols-1 gap-2">
             <Link
               className={clsx(
                 "py-3 px-5 rounded-2xl bg-white",
@@ -166,9 +166,10 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
               onClick={reset}
               disabled={isLoading}
             >
-              Đặt Lại
+              Reset
             </button>
           )}
+          
           <button
             className={clsx(
               "px-5 py-2 rounded-lg uppercase font-bold",
@@ -177,7 +178,7 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
             onClick={handleDraw}
             disabled={isLoading}
           >
-            Quay Số
+            Draw
           </button>
         </div>
       </div>

@@ -16,10 +16,10 @@ const Login: React.FC<Props> = () => {
   const [done, setDone] = useState(false);
   const schema = useMemo(() => {
     return yup.object().shape({
-      storeName: yup.string().required("Tên cửa hàng là bắt buộc!"),
-      storeCode: yup.string().required("Mã cửa hàng là bắt buộc!"),
-      email: yup.string().email("Email không chính xác!").required("Email là bắt buộc!"),
-      phoneNumber: yup.string().required("Số điện thoại là bắt buộc!"),
+      storeName: yup.string().required("Name is required!"),
+      storeCode: yup.string().required("Branch is required!"),
+      email: yup.string().email().required("Email is reuqired!"),
+      phoneNumber: yup.string().required("Phone is required!"),
       // fullName: yup.string().required("Họ tên bắt buộc!"),
       // address: yup.string().required("Địa chỉ là bắt buộc"),
     });
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = () => {
           {!done && (
             <div className="w-full px-10 max-w-lg py-10">
               <h1 className="uppercase text-xl text-center text-white mb-2">
-                Quay số may mắn
+                Lucky Draw
               </h1>
               <Formik
                 initialValues={{
@@ -52,7 +52,6 @@ const Login: React.FC<Props> = () => {
                   const dataRs = await shopRegister(values);
                   const { data } = dataRs;
                   if (data.success && data.message) {
-                    alert(data.message);
                     setDone(true);
                   }
                   hideLoading();
@@ -62,19 +61,19 @@ const Login: React.FC<Props> = () => {
                   <>
                     <label className="block">
                       <TextInputFormik
-                        label={"Tên gian hàng"}
+                        label={"Name"}
                         type="text"
                         name="storeName"
-                        placeholder={"Tên gian hàng"}
+                        // placeholder={"Tên gian hàng"}
                         required
                       />
                     </label>
                     <label className="block">
                       <TextInputFormik
-                        label={"Mã gian hàng"}
+                        label={"Branch"}
                         type="text"
                         name="storeCode"
-                        placeholder={"Mã gian hàng"}
+                        // placeholder={"Mã gian hàng"}
                         required
                       />
                     </label>
@@ -98,10 +97,10 @@ const Login: React.FC<Props> = () => {
                     </label> */}
                     <label className="block">
                       <TextInputFormik
-                        label={"Số điện thoại"}
+                        label={"Phone Number"}
                         type="text"
                         name="phoneNumber"
-                        placeholder={"Số điện thoại"}
+                        // placeholder={"Số điện thoại"}
                         required
                       />
                     </label>
@@ -110,7 +109,7 @@ const Login: React.FC<Props> = () => {
                         label={"Email"}
                         type="text"
                         name="email"
-                        placeholder={"Email"}
+                        // placeholder={"Email"}
                         required
                       />
                     </label>
@@ -120,7 +119,7 @@ const Login: React.FC<Props> = () => {
                         className="bg-white px-5 py-2 rounded-lg mt-2"
                         onClick={() => handleSubmit()}
                       >
-                        Đăng ký
+                        Confirm
                       </button>
                     </div>
                   </>
@@ -130,7 +129,7 @@ const Login: React.FC<Props> = () => {
           )}
           {done && (
             <div className="text-center mt-10 mb-10">
-              <p className="text-4xl md:text-white mt-10">Cảm ơn bạn đã đăng ký!</p>
+              <p className="text-4xl md:text-white mt-10">All done, Thank you!</p>
             </div>
           )}
         </div>

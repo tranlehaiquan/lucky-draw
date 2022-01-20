@@ -9,7 +9,7 @@
     background-image: url("../images/bg.jpg");
     background-color: #000858;
     min-height: 100vh;
-    background-position: center;
+    background-position: top center;
   }
 }
 

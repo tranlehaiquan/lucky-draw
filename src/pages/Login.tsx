@@ -42,20 +42,20 @@ const Login: React.FC<Props> = () => {
                 <>
                   <label className="block mb-6">
                     <TextInputFormik
-                      label={"Tên đăng nhập"}
+                      label={"Account name"}
                       type="text"
                       name="username"
-                      placeholder={"Tên đăng nhập"}
+                      placeholder={"Account name"}
                       required
                     />
                   </label>
 
                   <label className="block mb-6">
                     <TextInputFormik
-                      label={"Mật khẩu"}
+                      label={"Password"}
                       type="password"
                       name="password"
-                      placeholder={"Mật khẩu"}
+                      placeholder={"Password"}
                       required
                     />
                   </label>
@@ -65,7 +65,7 @@ const Login: React.FC<Props> = () => {
                       className="bg-white px-5 py-2 rounded-lg mt-2"
                       onClick={() => handleSubmit()}
                     >
-                      Đăng nhập
+                      Login
                     </button>
                   </div>
                 </>
