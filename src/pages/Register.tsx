@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { AuthenticateContext } from "../components/Authenticate";
 import { Layout1 } from "../components/Layout";
 import { TextInputFormik } from "../components/TextInput";
-import banner from "../images/banner.jpeg";
+import banner from "../images/banner.png";
 import shopRegister from "../services/shopRegister";
 
 interface Props {
@@ -30,7 +30,7 @@ const Login: React.FC<Props> = () => {
       <div className="md:hidden block">
         <img src={banner} className="w-full" />
       </div>
-      <div className="grid grid-cols-1 gap-6 h-full pt-60">
+      <div className="grid grid-cols-1 gap-6 h-full md:pt-60">
         <div className="h-full flex justify-center items-center">
           {!done && (
             <div className="w-full px-10 max-w-lg py-10">
