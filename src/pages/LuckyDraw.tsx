@@ -99,8 +99,8 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
     <Layout1>
       <div className=" max-w-3xl mx-auto">
         <div>
-          <div className="flex justify-center">
-            <img src={title} className="max-w-lg invisible" alt="text" />
+          <div className="flex justify-center h-64">
+            {/* <img src={title} className="max-w-lg" alt="text" /> */}
           </div>
 
           {!dirty ? (
@@ -126,21 +126,33 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
         </div>
         {!isLoading && (
           <div className="fixed top-4 right-4 uppercase font-bold text-blue-600 grid grid-cols-1 gap-2">
-            {totalShop !== 1 && (
-              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw">
-                Đi đến giải đặc biệt →
-              </Link>
-            )}
-            {totalShop !== 4 && (
-              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw4">
-                Đi đến giải tư →
-              </Link>
-            )}
-            {totalShop !== 8 && (
-              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw8">
-                Đi đến giải tám →
-              </Link>
-            )}
+            <Link
+              className={clsx(
+                "py-3 px-5 rounded-2xl bg-white",
+                totalShop === 1 && "opacity-25 cursor-not-allowed pointer-events-none"
+              )}
+              to="/draw"
+            >
+              Đi đến giải đặc biệt →
+            </Link>
+            <Link
+              className={clsx(
+                "bg-white py-3 px-5 rounded-2xl",
+                totalShop === 4 && "opacity-25 cursor-not-allowed pointer-events-none"
+              )}
+              to="/draw4"
+            >
+              Đi đến giải tư →
+            </Link>
+            <Link
+              className={clsx(
+                "bg-white py-3 px-5 rounded-2xl",
+                totalShop === 5 && "opacity-25 cursor-not-allowed pointer-events-none"
+              )}
+              to="/draw5"
+            >
+              Đi đến giải năm →
+            </Link>
           </div>
         )}
 
