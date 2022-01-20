@@ -18,10 +18,18 @@ function Routers() {
           }
         />
         <Route
-          path="/draw5"
+          path="/draw4"
           element={
             <RequireAuth>
-              <LuckyDraw key={5} totalShop={5} />
+              <LuckyDraw key={4} totalShop={4} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/draw8"
+          element={
+            <RequireAuth>
+              <LuckyDraw key={8} totalShop={8} />
             </RequireAuth>
           }
         />

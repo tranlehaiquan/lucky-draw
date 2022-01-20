@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        heliotrope: "#F847FB",
+        heliotrope: "#0032C0",
       },
     },
   },

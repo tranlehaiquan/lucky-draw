@@ -39,7 +39,7 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
     setSelectedShopVisiable(
       [...new Array(totalShop)].map(() => generateShop())
     );
-    
+
     setDrawing(true);
     const [luckyDrawRs] = await Promise.all([
       luckyDraw(totalShop),
@@ -97,10 +97,10 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
 
   return (
     <Layout1>
-      <div className="grid grid-cols-2 pt-40 h-full">
-        <div className="px-3">
+      <div className=" max-w-3xl mx-auto">
+        <div>
           <div className="flex justify-center">
-            <img src={title} className="max-w-lg" alt="text" />
+            <img src={title} className="max-w-lg invisible" alt="text" />
           </div>
 
           {!dirty ? (
@@ -124,12 +124,27 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
             />
           ))}
         </div>
-        {!isLoading && <div className="fixed top-4 right-4 uppercase font-bold text-blue-600">
-          {totalShop === 1 && <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw5">Đi đến giải khuyến khích →</Link>}
-          {totalShop === 5 && <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw">Đi đến giải đặc biệt →</Link>}
-        </div>}
+        {!isLoading && (
+          <div className="fixed top-4 right-4 uppercase font-bold text-blue-600 grid grid-cols-1 gap-2">
+            {totalShop !== 1 && (
+              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw">
+                Đi đến giải đặc biệt →
+              </Link>
+            )}
+            {totalShop !== 4 && (
+              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw4">
+                Đi đến giải tư →
+              </Link>
+            )}
+            {totalShop !== 8 && (
+              <Link className="bg-white py-3 px-5 rounded-2xl" to="/draw8">
+                Đi đến giải tám →
+              </Link>
+            )}
+          </div>
+        )}
 
-        <div className="flex items-end justify-end h-full pb-5 pr-5">
+        <div className="flex items-end justify-center pb-5 fixed right-0 bottom-0 pr-4">
           {dirty && (
             <button
               className={clsx(
@@ -156,6 +171,6 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
       </div>
     </Layout1>
   );
-}
+};
 
 export default App;

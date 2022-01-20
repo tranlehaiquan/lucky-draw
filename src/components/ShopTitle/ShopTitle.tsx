@@ -6,10 +6,10 @@ interface Props {
 
 const ShopTitle: React.FC<Props> = (props) => {
   return (
-    <div className="grid grid-cols-3 gap-4 text-white uppercase font-bold text-center">
-      <p>Tên Gian Hàng</p>
-      <p>Mã Gian Hàng</p>
-      <p>Số Điện Thoại</p>
+    <div className="grid grid-cols-2 gap-4 text-white uppercase font-bold text-center">
+      <p>Tên</p>
+      {/* <p>Mã Gian Hàng</p> */}
+      <p>SĐT</p>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const ShopItem: React.FC<Props> = ({
 }) => {
   return (
     <div className={className}>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div className="">
           <div className="bg-shopItem p-1 mt-2">
             <div
@@ -26,18 +26,6 @@ const ShopItem: React.FC<Props> = ({
               )}
             >
               {storeName}
-            </div>
-          </div>
-        </div>
-        <div className="text-center">
-          <div className="bg-shopItem p-1 mt-2">
-            <div
-              className={clsx(
-                "w-full h-8 text-white flex items-center justify-center",
-                secondary ? "bg-blue-400" : "bg-heliotrope"
-              )}
-            >
-              {storeCode}
             </div>
           </div>
         </div>

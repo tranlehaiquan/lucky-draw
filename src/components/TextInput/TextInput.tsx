@@ -29,7 +29,7 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
 }) => {
   return (
-    <label className="block mb-6">
+    <label className="block mb-3">
       <label className="text-white">
         {label} {required && <span className="text-red-500">*</span>}
       </label>

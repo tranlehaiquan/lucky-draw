@@ -30,11 +30,11 @@ const Login: React.FC<Props> = () => {
       <div className="md:hidden block">
         <img src={banner} className="w-full" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+      <div className="grid grid-cols-1 gap-6 h-full pt-60">
         <div className="h-full flex justify-center items-center">
           {!done && (
             <div className="w-full px-10 max-w-lg py-10">
-              <h1 className="uppercase text-xl text-center text-white md:text-black mb-2">
+              <h1 className="uppercase text-xl text-center text-white mb-2">
                 Thông tin nhà bán hàng cần cung cấp
               </h1>
               <Formik
@@ -60,7 +60,7 @@ const Login: React.FC<Props> = () => {
               >
                 {({ handleSubmit }) => (
                   <>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Tên gian hàng"}
                         type="text"
@@ -69,7 +69,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Mã gian hàng"}
                         type="text"
@@ -78,7 +78,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Họ tên"}
                         type="text"
@@ -87,7 +87,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Địa chỉ"}
                         type="text"
@@ -96,7 +96,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Số điện thoại"}
                         type="text"
@@ -105,7 +105,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block mb-6">
+                    <label className="block">
                       <TextInputFormik
                         label={"Email"}
                         type="text"
@@ -130,7 +130,7 @@ const Login: React.FC<Props> = () => {
           )}
           {done && (
             <div className="text-center mt-10 mb-10">
-              <p className="text-xl md:text-white">Cảm ơn bạn đã đăng ký!</p>
+              <p className="text-4xl md:text-white mt-10">Cảm ơn bạn đã đăng ký!</p>
             </div>
           )}
         </div>

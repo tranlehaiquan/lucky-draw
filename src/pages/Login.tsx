@@ -25,7 +25,7 @@ const Login: React.FC<Props> = () => {
 
   return (
     <Layout1>
-      <div className="grid grid-cols-2 gap-6 h-full">
+      <div className="grid grid-cols-1 gap-6 h-full pt-80">
         <div className="h-full flex justify-center items-center">
           <div className="w-full px-10 max-w-lg">
             <Formik
