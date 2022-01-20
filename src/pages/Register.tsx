@@ -18,10 +18,10 @@ const Login: React.FC<Props> = () => {
     return yup.object().shape({
       storeName: yup.string().required("Tên cửa hàng là bắt buộc!"),
       storeCode: yup.string().required("Mã cửa hàng là bắt buộc!"),
-      fullName: yup.string().required("Họ tên bắt buộc!"),
-      email: yup.string().required("Email là bắt buộc!"),
+      email: yup.string().email("Email không chính xác!").required("Email là bắt buộc!"),
       phoneNumber: yup.string().required("Số điện thoại là bắt buộc!"),
-      address: yup.string().required("Địa chỉ là bắt buộc"),
+      // fullName: yup.string().required("Họ tên bắt buộc!"),
+      // address: yup.string().required("Địa chỉ là bắt buộc"),
     });
   }, []);
 
@@ -35,16 +35,16 @@ const Login: React.FC<Props> = () => {
           {!done && (
             <div className="w-full px-10 max-w-lg py-10">
               <h1 className="uppercase text-xl text-center text-white mb-2">
-                Thông tin nhà bán hàng cần cung cấp
+                Quay số may mắn
               </h1>
               <Formik
                 initialValues={{
                   storeName: "",
                   storeCode: "",
-                  fullName: "",
+                  // fullName: "",
                   email: "",
                   phoneNumber: "",
-                  address: "",
+                  // address: "",
                 }}
                 validationSchema={schema}
                 onSubmit={async (values) => {
@@ -78,7 +78,7 @@ const Login: React.FC<Props> = () => {
                         required
                       />
                     </label>
-                    <label className="block">
+                    {/* <label className="block">
                       <TextInputFormik
                         label={"Họ tên"}
                         type="text"
@@ -86,8 +86,8 @@ const Login: React.FC<Props> = () => {
                         placeholder={"Họ tên"}
                         required
                       />
-                    </label>
-                    <label className="block">
+                    </label> */}
+                    {/* <label className="block">
                       <TextInputFormik
                         label={"Địa chỉ"}
                         type="text"
@@ -95,7 +95,7 @@ const Login: React.FC<Props> = () => {
                         placeholder={"Địa chỉ"}
                         required
                       />
-                    </label>
+                    </label> */}
                     <label className="block">
                       <TextInputFormik
                         label={"Số điện thoại"}
