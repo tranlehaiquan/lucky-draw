@@ -27,7 +27,6 @@
 }
 
 .wheel__slides {
-  height: 100%;
   position: relative;
   width: 100%;
 }
@@ -68,12 +67,11 @@
 }
 
 .wheel__slide {
-  @apply text-2xl;
+  @apply text-3xl font-bold;
   align-items: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   display: flex;
-  font-weight: 400;
   height: 100%;
   width: 100%;
   position: absolute;

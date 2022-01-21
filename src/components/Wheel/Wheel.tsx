@@ -20,7 +20,7 @@ const Wheel: React.FC<Props> = ({ className, shops, selected, drawing = false, w
           className
         )}
       >
-        <div className="bg-heliotrope text-2xl w-full h-10 text-white font-bold flex justify-center items-center overflow-hidden">
+        <div className="bg-heliotrope text-2xl w-full h-10 uppercase text-white font-bold flex justify-center items-center overflow-hidden">
           <div
             style={{
               height: "200px",
