@@ -16,11 +16,11 @@ const Wheel: React.FC<Props> = ({ className, shops, selected, drawing = false, w
     <>
       <div
         className={clsx(
-          "bg-shopItem w-2/5 p-1 ml-auto mr-auto mb-5",
+          "bg-shopItem w-3/4 p-1 ml-auto mr-auto mb-5",
           className
         )}
       >
-        <div className="bg-heliotrope w-full h-8 text-white font-bold flex justify-center items-center overflow-hidden">
+        <div className="bg-heliotrope text-2xl w-full h-10 text-white font-bold flex justify-center items-center overflow-hidden">
           <div
             style={{
               height: "200px",
