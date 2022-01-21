@@ -68,14 +68,18 @@
 }
 
 .wheel__slide {
+  @apply text-2xl;
   align-items: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   display: flex;
-  font-size: 20px;
   font-weight: 400;
   height: 100%;
   width: 100%;
   position: absolute;
   justify-content: center;
+}
+
+.wheel__shadow-top, .wheel__shadow-bottom {
+  border: none;
 }
