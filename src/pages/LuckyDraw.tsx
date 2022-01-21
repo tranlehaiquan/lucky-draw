@@ -105,7 +105,7 @@ const App: React.FC<{ totalShop: number }> = ({ totalShop }) => {
 
           {!dirty ? (
             <div className="bg-shopItem p-1 mt-2 w-3/4 ml-auto mr-auto mb-5">
-              <div className="w-full h-10 text-white flex items-center justify-center bg-heliotrope uppercase font-bold">
+              <div className="w-full text-2xl h-10 text-white flex items-center justify-center bg-heliotrope uppercase font-bold">
                 Name
               </div>
             </div>
